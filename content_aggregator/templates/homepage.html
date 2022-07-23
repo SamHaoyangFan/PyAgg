@@ -1,0 +1,84 @@
+<!DOCTYPE hyml>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PyAgg!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'imgs/favicon-16x16.png' %}">
+  </head>
+
+  <body class="d-flex flex-column">
+    <header>
+      <nav class = "container">
+        <div class="row">
+          <div class="col text-center">
+            <div class="posta">
+              <img src="{% static 'imgs/pylogo.png' %}" alt="PyAgg! Logo" id="site-logo" />
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container flex-grow-1">
+      <div class="row">
+        <div class="col-sm-2">
+        {% block sidebar %}
+          <ul class="sidebar-nav">
+            <ul class="sidebar-nav">
+            {% if user.is_authenticated %}
+              <li>User: {{ user.get_username }}</li>
+              <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+            {% else %}
+              <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+            {% endif %}
+          </ul>
+       {% endblock %}
+        </div>
+        <div class="col">
+          {% for post in posts %}
+          <section class="card mb-3" id="portfolio">
+            <div class="row no-gutters">
+              <div class="col-md-2 my-auto">
+                <img
+                  src="{{MEDIA_URL}}{{ post.image }}"
+                  class="img-fluid ml-3 my-3"
+                  alt="{{ post.pubdate }}"
+                >
+              </div>
+              <div class="col-md-10">
+                <div class="card-body ml-3">
+                  <h3 class="card-title">{{ post.title }}</h3>
+                  <p class="card-text">{{ post.description }}</p>
+                  <a href="{{ post.link }}">
+                    <p class="card-text">open the news!</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+          {% endfor %}
+        </div>
+      </div>
+    </main>
+
+    <footer class="container-fluid">
+      <div class="row">
+        <div class="col text-center">
+          <img src="{% static 'imgs/python-powered.svg' %}" alt="Python Powered" height="50px" />
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+
+  </body>
+</html>

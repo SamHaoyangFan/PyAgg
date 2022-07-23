@@ -1,0 +1,1 @@
+web: gunicorn content_aggregator.wsgi --log-file -
