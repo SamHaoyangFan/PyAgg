@@ -5,6 +5,7 @@ Python News Aggregator
 
 ---
 **What is the purpose of this project?**
+
 It will automatically update the news from designated website by designated rate
 
 
