@@ -17,4 +17,5 @@ input ```python manage.py runserver``` in the command prompt
 **Where is my news resource and how should I update it?**
 
 The news resource feed website is inside ```news/management/commands/startjobs.py```. If you want to change the website, please update it with **feed**
+
 Run ```python manage.py startjobs``` to update the news
