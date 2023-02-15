@@ -8,4 +8,7 @@ Python News Aggregator
 
 It will automatically update the news from designated website by designated rate
 
+---
+**How to run this project**
 
+input ```python manage.py runserver``` in the command prompt
