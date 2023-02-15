@@ -30,12 +30,13 @@ def save_new_posts(feed):
             )
             post.save()
 
-def fetch_fox_posts():
-    _feed = feedparser.parse("http://feeds.foxnews.com/foxnews/latest")
+def fetch_first_posts():
+    #Please parse RSS feed for the news address
+    _feed = feedparser.parse("")
     save_new_posts(_feed)
 
-def fetch_nbc_posts():
-    _feed = feedparser.parse("https://feeds.nbcnews.com/nbcnews/public/news")
+def fetch_second_posts():
+    _feed = feedparser.parse("")
     save_new_posts(_feed)
 
 def delete_old_job_executions(max_age=604_800):
@@ -48,24 +49,24 @@ class Command(BaseCommand):
         scheduler.add_jobstore(DjangoJobStore(), "default")
 
         scheduler.add_job(
-            fetch_fox_posts,
+            fetch_first_posts,
             trigger="interval",
             minutes=2,
-            id="The FOX News",
+            id="The First News",
             max_instances=1,
             replace_existing=True,
         )
-        logger.info("Added job: The FOX news feed.")
+        logger.info("Added job: The first news feed.")
 
         scheduler.add_job(
-            fetch_nbc_posts,
+            fetch_second_posts,
             trigger="interval",
             minutes=2,
-            id="The NBC News",
+            id="The Second News",
             max_instances=1,
             replace_existing=True,
         )
-        logger.info("Added job: The NBC news feed.")
+        logger.info("Added job: The second news feed.")
 
         scheduler.add_job(
             delete_old_job_executions,
