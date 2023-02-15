@@ -1,3 +1,1 @@
-# PyAgg
-Python News Aggregator
----
+
